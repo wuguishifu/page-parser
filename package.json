@@ -8,7 +8,9 @@
   "version": "1.0.1",
   "description": "",
   "scripts": {
-    "build": "tsc"
+    "publish": "npm publish --access=public",
+    "build": "tsc",
+    "prepublish": "tsc"
   },
   "main": "./lib/index.ts",
   "keywords": [],
