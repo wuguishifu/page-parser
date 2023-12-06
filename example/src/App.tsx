@@ -1,25 +1,23 @@
 import './index.css';
-import { parse } from '../../lib';
-import { Page } from '../../lib';
 import testString from './test.tex?raw';
+import { Tree } from 'page-parser';
 
 export default function App() {
-    console.log(parse(testString));
-
     return (
-        <Page
-            text={testString}
-            components={{
-                test: testComponent
+        <Tree
+            file={testString}
+            componentDefinitions={{
+                Card: ({ children, className }) => (
+                    <div className={`flex flex-1 flex-col items-center py-4 bg-blue-200 rounded-lg ${className}`}>
+                        {children}
+                    </div>
+                ),
+                Split: ({ children, className }) => (
+                    <div className={`w-full flex flex-row items-center gap-8 px-8 ${className}`}>
+                        {children}
+                    </div>
+                )
             }}
         />
     );
 };
-
-function testComponent({ className, content }: { className: string, content: string[] }) {
-    return (
-        <div className={className} style={{ border: '1px solid black' }}>
-            {content.map((i, n) => <p key={n}>{i}</p>)}
-        </div>
-    );
-}
