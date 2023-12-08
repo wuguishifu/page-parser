@@ -96,6 +96,27 @@ A environment component will have children. This is an example of that:
 \end{componentName}
 ```
 
+### Compilation
+
+You can use the `npx compile` script to generate React components from the latex code. The usage is `npx compile <inputPath> <outputPath> [flags]`. You will get a warning if you use an output path that already exists, which you can supress using the `-f` or `--force` flag. This will generate a file in the following format:
+
+```tsx
+import Component1 from '@/components/Component1';
+import Component2 from '@/components/Component2';
+
+export default function Page() {
+    return (
+        <Component1>
+            <Component2>
+                hello world
+            </Component2>
+        </Component1>
+    );
+};
+```
+
+Please feel free to modify the generated code as required. This by default uses the @/components/* import. The custom components should be exported as default functions, and the component name is expected to be the same as the file name. In the future, I want to make a more modular way to do this with potentially a config file.
+
 ### Debugging
 
 A debug component is also included. You can use this to view the parse tree of the tex string. It will output a JSON string onto the page. You can use it as follows (this is using vite, so you can import raw files using the ?raw delim):
@@ -192,9 +213,14 @@ export default function App() {
 
 ### Todo
 
-- Add more prebaked components for standard components like img, pre, etc.
-- Add support for custom tex-like commands, for example \image{filepath.png}[className]
-- Build parser to convert .tex files into React components
+- ~~Add more prebaked components for standard components like img, pre, etc.~~
+- ~~Add support for custom tex-like commands, for example \image{filepath.png}[className]~~
+- ~~Build parser to convert .tex files into React components~~
+- Modify the generated html code to use a config file to specify:
+  - how to import custom components
+  - custom component definitions
+  - etc.
+- Replace dangerouslySetInnerHtml with parsing formatting html code in bin compile and in Tree component
 
 ### Credit
 

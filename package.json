@@ -5,12 +5,15 @@
     "type": "git",
     "url": "https://github.com/wuguishifu/page-parser.git"
   },
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "",
   "scripts": {
     "publish": "npm publish --access=public",
     "build": "tsc",
     "prepublish": "tsc"
+  },
+  "bin": {
+    "compile": "bin/compile.js"
   },
   "main": "./lib/index.ts",
   "keywords": [],

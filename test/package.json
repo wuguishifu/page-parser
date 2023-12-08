@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "test": "node compile.js test.tex output.jsx --force"
+  }
+}

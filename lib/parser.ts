@@ -4,14 +4,14 @@ export function parse(text: string): any {
     const queue: string[] = text
         .replace(/\r\n|\n/g, '\n')
         .replace(/ {2,}/g, '')
-        .replace(/\n\n/g, '<br>')
-        .replace(/\n/g, ' ')
         .split(/\\/g)
         .filter(i => i)
-        .flatMap(i => ('\\' + i).split(/(\\.*?(?:{.*?}){1,}(?:\[.*?\]){0,})/gm))
+        .map(i => ('\\' + i).trim())
+        .flatMap(i => i.split(/\n\n/g))
+        .map(i => i.replace(/\n/g, ' '))
+        .flatMap(i => i.split(/(\\.*?(?:{.*?}){1,}(?:\[.*?\]){0,})/gm))
         .map(i => i.trim())
-        .filter(i => i && i !== '<br>')
-        .flatMap(i => i.split(/<br>/g));
+        .filter(i => i)
 
     const root: TreeNode = {
         name: 'root',
@@ -25,7 +25,6 @@ export function parse(text: string): any {
         switch (true) {
             case item.startsWith('\\begin'): {
                 const [name, ...values] = item.match(/\{.*?\}/g)?.map(i => i.substring(1, i.length - 1)) ?? [];
-                console.log({ name, values });
                 const className = item.match(/\[(.*)\]/);
                 const node: TreeNode = {
                     name,
@@ -69,9 +68,9 @@ export function parse(text: string): any {
 
                 const formatted = item
                     .replaceAll('_ _', '')
-                    .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                     .replace(/\*(.*?)\*/g, '<i>$1</i>')
-                    .replace(/__(.*?)__/g, '<u>$1</u>')
+                    .replace(/__(.*?)__/g, '<u>$1</u>');
 
                 current.children.push({
                     name: 'p',
