@@ -1,7 +1,13 @@
 import React from 'react';
 import { baked } from './baked';
-import { TreeNode } from "./types"
 import { parse } from './parser';
+
+export type TreeNode = {
+    name: string;
+    className?: string;
+    children?: TreeNode[];
+    values?: string[];
+};
 
 type BranchProps = { node: TreeNode } & BaseProps;
 

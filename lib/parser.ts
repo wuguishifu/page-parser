@@ -1,4 +1,4 @@
-import { TreeNode } from './types';
+import { TreeNode } from './Tree';
 
 export function parse(text: string): any {
     const queue: string[] = text

@@ -4,11 +4,11 @@ This is a package that allows you to use TeX syntax to quickly create React webp
 
 ## Version 1.0.1
 
-Currently, div, p, and br default classes are implemented. Tree works with componentDefinition and DefaultComponent.
+Currently, div, p, br, img, and a default tags are implemented. Spacers hspace and vpsace are also implemented. Tree component works with componentDefinition and DefaultComponent. Bin npx script works to compile a TeX file into a React commponent.
 
 ## Installation
 
-NPM:
+npm:
 
 ```.
 npm i @wuguishifu/page-parser
