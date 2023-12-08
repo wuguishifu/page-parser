@@ -32,9 +32,95 @@ export default {
 
 ## Documentation
 
-### Data
+### Plain Text
 
-Data to be parsed must be a string in latex format (with spaces). This can be an inline variable, or it can be imported from a separate file. You can also pass in a dictionary for custom components defined in your Tex tree. You can also pass in a default component JSX function. Here's an example usage in Vite with React:
+Formatted text can be rendered in a few different ways such as:
+
+- \*\*Bold Text\*\* **Bold Text**
+- \*Italicized Text\* *Italicized Text*
+- \_\_Underlined Text\_\_ **Underlined Text**
+- \*\*\*Bold and Italicized Text\*\*\* ***Bold and Italicized Text***
+
+Some important things to note:
+
+Plain text separated by a single line will be condensed into one line, while plain text separated by multiple lines will remain separated. This is an intentional design choice that helps with .tex formatting while editing
+
+### Default Components
+
+#### Image
+
+```tex
+\image{src}[className]
+```
+
+#### Hyperlink
+
+```tex
+\url{link}{display}[className]
+```
+
+#### Horizontal and Vertical spacing
+
+```tex
+\vspace{space values (accepts number, string)}
+```
+
+```tex
+\hspace{space values (accepts number, string)}
+```
+
+### Custom Components
+
+You can define a custom JSX component to use in your tex definition. Every component definition can have `values`, `className`, and `children` values. Here are the type definitions for these props:
+
+```ts
+type ComponentProps = {
+    className?: string;
+    children?: React.ReactNode;
+    values?: string[]
+};
+```
+
+A empty component will not have children. This is an example of that:
+
+```tex
+\componentName{value1}{value2}{value3}{...}[className]
+```
+
+A environment component will have children. This is an example of that:
+
+```tex
+\begin{componentName}{value1}{value2}{value3}{...}[className]
+    children go here
+    these can be plain text, empty components, or nested environment components
+\end{componentName}
+```
+
+### Debugging
+
+A debug component is also included. You can use this to view the parse tree of the tex string. It will output a JSON string onto the page. You can use it as follows (this is using vite, so you can import raw files using the ?raw delim):
+
+```tsx
+import { Debug } from 'page-parser';
+import definition from './definition.tex?raw';
+
+export default function App() {
+    return (
+        <Debug file={definition}/>
+    );
+};
+```
+
+You can also use the parse function to gather the actual tree as a JSON object. You can use it as follows:
+
+```ts
+import { parse } from 'page-parser';
+import definition from './definition.tex?raw';
+
+console.log(parse(definition));
+```
+
+### Full example
 
 #### App.tsx
 
@@ -72,11 +158,30 @@ export default function App() {
 
 ```tex
 \begin{Split}
-    \begin{Card}
-        Card 1
+    \begin{Card}[bg-red-200]
+        **Bold Text**
     \end{Card}
     \begin{Card}
-        Card 2
+        *Italicized Text*
+    \end{Card}
+\end{Split}
+
+\begin{Split}[mt-8]
+    \begin{Card}[bg-green-200]
+        __Underlined Text__
+
+        hi
+        hello
+
+        one space
+        two {space}
+
+        three space
+        \url{https://bo-bramer.com}{Bo Bramer.com}[text-gray-400 underline]
+    \end{Card}
+    \begin{Card}[bg-purple-200]
+        ***Bold and Italicized Text***
+        \image{vite.svg}[h-8]
     \end{Card}
 \end{Split}
 ```
@@ -89,6 +194,7 @@ export default function App() {
 
 - Add more prebaked components for standard components like img, pre, etc.
 - Add support for custom tex-like commands, for example \image{filepath.png}[className]
+- Build parser to convert .tex files into React components
 
 ### Credit
 

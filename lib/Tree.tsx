@@ -10,7 +10,8 @@ type TreeProps = { file: string } & BaseProps;
 type BaseProps = {
     componentDefinitions?: Record<string, React.FC<{
         className?: string;
-        children: React.ReactNode;
+        children?: React.ReactNode;
+        values?: string[]
     }>>;
     DefaultComponent?: React.FC<{
         className?: string;
@@ -23,7 +24,7 @@ export function TreeBranch(props: BranchProps) {
     const Component = components?.[node.name] ?? baked[node.name] ?? DefaultComponent ?? Default;
 
     return (
-        <Component className={node.className} value={node.value}>
+        <Component className={node.className} values={node.values}>
             {node.children?.map((child, i) => (
                 <TreeBranch
                     key={i}
@@ -36,7 +37,7 @@ export function TreeBranch(props: BranchProps) {
     );
 };
 
-function Default({ children, className }: { children: React.ReactNode, className?: string }) {
+export function Default({ children, className }: { children: React.ReactNode, className?: string }) {
     return (
         <div className={className}>
             {children}
@@ -50,4 +51,12 @@ export function Tree({ file, componentDefinitions, DefaultComponent }: TreeProps
         componentDefinitions={componentDefinitions}
         DefaultComponent={DefaultComponent}
     />;
+}
+
+export function Debug({ file }: { file: string }) {
+    return (
+        <pre>
+            {JSON.stringify(parse(file), null, 4)}
+        </pre>
+    )
 }
