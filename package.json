@@ -5,7 +5,7 @@
     "type": "git",
     "url": "https://github.com/wuguishifu/page-parser.git"
   },
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "",
   "scripts": {
     "build": "tsc",
