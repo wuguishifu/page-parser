@@ -98,7 +98,13 @@ A environment component will have children. This is an example of that:
 
 ### Compilation
 
-You can use the `npx @wuguishifu/page-parser` script to generate React components from the latex code. The usage is `npx @wuguishifu/page-parser <inputPath> <outputPath> [flags]`. You will get a warning if you use an output path that already exists, which you can supress using the `-f` or `--force` flag. This will generate a file in the following format:
+You can use the `npx @wuguishifu/page-parser` script to generate React components from the latex code. The usage is
+
+```none
+npx @wuguishifu/page-parser <inputPath> <outputPath> [flags]
+```
+
+You will get a warning if you use an output path that already exists, which you can supress using the `-f` or `--force` flag. This will generate a file in the following format:
 
 ```tsx
 import Component1 from '@/components/Component1';
