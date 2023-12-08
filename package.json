@@ -5,14 +5,14 @@
     "type": "git",
     "url": "https://github.com/wuguishifu/page-parser.git"
   },
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "",
   "scripts": {
     "build": "tsc",
     "prepublish": "tsc"
   },
   "bin": {
-    "compile": "bin/compile.js"
+    "page-parser:compile": "bin/compile.js"
   },
   "main": "./lib/index.ts",
   "keywords": [],
