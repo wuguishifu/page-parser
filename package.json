@@ -5,7 +5,7 @@
     "type": "git",
     "url": "https://github.com/wuguishifu/page-parser.git"
   },
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "",
   "scripts": {
     "publish": "npm publish --access=public",
