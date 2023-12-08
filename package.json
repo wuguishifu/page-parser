@@ -5,15 +5,13 @@
     "type": "git",
     "url": "https://github.com/wuguishifu/page-parser.git"
   },
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "",
   "scripts": {
     "build": "tsc",
     "prepublish": "tsc"
   },
-  "bin": {
-    "page-parser:compile": "bin/compile.js"
-  },
+  "bin": "bin/compile.js",
   "main": "./lib/index.ts",
   "keywords": [],
   "license": "ISC",
